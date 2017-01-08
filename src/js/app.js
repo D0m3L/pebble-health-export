@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, Natacha Porté
+ * Copyright (c) 2016-2017, Natacha Porté
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -31,7 +31,7 @@ var to_send = [];
 var senders = [new XMLHttpRequest(), new XMLHttpRequest()];
 var i_sender = 1;
 var bundle_size = 0;
-var jsSHA = require("sha");
+var jsSHA = require("./sha.js");
 
 function sendPayload(payload) {
    var data = new FormData();
