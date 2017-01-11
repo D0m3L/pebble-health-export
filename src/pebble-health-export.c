@@ -246,7 +246,7 @@ minute_data_image(char *buffer, size_t size,
 	}
 
 	if (data->is_invalid) {
-		int i = snprintf(buffer + ret, size - ret, ",,,,,,");
+		int i = snprintf(buffer + ret, size - ret, ",,,,,,,");
 
 		if (i <= 0) {
 			APP_LOG(APP_LOG_LEVEL_ERROR, "minute_data_image: "
@@ -260,13 +260,15 @@ minute_data_image(char *buffer, size_t size,
 	uint16_t pitch = data->orientation >> 4;
 
 	int i = snprintf(buffer + ret, size - ret,
-	    ",%" PRIu8 ",%" PRIu16 ",%" PRIu16 ",%" PRIu16 ",%d,%" PRIu32,
+	    ",%" PRIu8 ",%" PRIu16 ",%" PRIu16 ",%" PRIu16 ",%d,%" PRIu32
+	      ",%" PRIu8,
 	    data->steps,
 	    yaw,
 	    pitch,
 	    data->vmc,
 	    (int)data->light,
-	    activity_mask);
+	    activity_mask,
+	    data->heart_rate_bpm);
 
 	if (i <= 0) {
 		APP_LOG(APP_LOG_LEVEL_ERROR, "minute_data_image: "
