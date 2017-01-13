@@ -246,7 +246,8 @@ minute_data_image(char *buffer, size_t size,
 	}
 
 	if (data->is_invalid) {
-		int i = snprintf(buffer + ret, size - ret, ",,,,,,,");
+		int i = snprintf(buffer + ret, size - ret,
+		    ",,,,,,%" PRIu32 ",", activity_mask);
 
 		if (i <= 0) {
 			APP_LOG(APP_LOG_LEVEL_ERROR, "minute_data_image: "
