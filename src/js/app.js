@@ -34,14 +34,13 @@ var bundle_size = 0;
 var jsSHA = require("./sha.js");
 
 function sendPayload(payload) {
-   var data = new FormData();
-   data.append(cfg_data_field, payload);
-
+    var data = cfg_data_field+'='+payload;
+    
    if (cfg_sign_field) {
       var sha = new jsSHA(cfg_sign_algo, "TEXT");
       sha.setHMACKey(cfg_sign_key, cfg_sign_key_format);
       sha.update(payload);
-      data.append(cfg_sign_field, sha.getHMAC(cfg_sign_field_format));
+      data += '&'+cfg_sign_field+'='+sha.getHMAC(cfg_sign_field_format);
    }
 
    if (cfg_extra_fields.length > 0) {
@@ -49,12 +48,13 @@ function sendPayload(payload) {
          var decoded = decodeURIComponent(cfg_extra_fields[i]).split("=");
          var name = decoded.shift();
          var value = decoded.join("=");
-         data.append(name, value);
+         data += '&'+name+'='+value;
       }
    }
 
    i_sender = 1 - i_sender;
    senders[i_sender].open("POST", cfg_endpoint, true);
+   senders[i_sender].setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
    senders[i_sender].send(data);
 }
 
