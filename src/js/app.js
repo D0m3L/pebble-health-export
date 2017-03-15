@@ -34,7 +34,7 @@ var bundle_size = 0;
 var jsSHA = require("./sha.js");
 
 function sendPayload(payload) {
-    var data = encodeURIComponent(cfg_data_field) + '=' + payload;
+    var data = encodeURIComponent(cfg_data_field) + '=' + encodeURIComponent(payload);
     
    if (cfg_sign_field) {
       var sha = new jsSHA(cfg_sign_algo, "TEXT");
