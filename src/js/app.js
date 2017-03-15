@@ -48,7 +48,7 @@ function sendPayload(payload) {
          var decoded = decodeURIComponent(cfg_extra_fields[i]).split("=");
          var name = decoded.shift();
          var value = decoded.join("=");
-         data += '&'+name+'='+value;
+         data += '&' + encodeURIComponent(name) + '=' + encodeURIComponent(value);
       }
    }
 
