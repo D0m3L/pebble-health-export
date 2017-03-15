@@ -34,13 +34,14 @@ var bundle_size = 0;
 var jsSHA = require("./sha.js");
 
 function sendPayload(payload) {
-    var data = cfg_data_field+'='+payload;
+    var data = encodeURIComponent(cfg_data_field) + '=' + payload;
     
    if (cfg_sign_field) {
       var sha = new jsSHA(cfg_sign_algo, "TEXT");
       sha.setHMACKey(cfg_sign_key, cfg_sign_key_format);
       sha.update(payload);
-      data += '&'+cfg_sign_field+'='+sha.getHMAC(cfg_sign_field_format);
+      data += '&' + encodeURIComponent(cfg_sign_field) +'=' 
+                  + encodeURIComponent(sha.getHMAC(cfg_sign_field_format));
    }
 
    if (cfg_extra_fields.length > 0) {
