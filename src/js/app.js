@@ -149,7 +149,7 @@ Pebble.addEventListener("appmessage", function(e) {
 });
 
 Pebble.addEventListener("showConfiguration", function() {
-   var settings = "?v=1.1";
+   var settings = "?v=1.2";
 
    Pebble.sendAppMessage({ "cfgStart": 1 });
 
