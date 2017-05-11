@@ -32,7 +32,7 @@ the name of the data field.
 When configured, the watchapp makes one POST request for each recorded
 Pebble Health entry, filling the data field with string like:
 
-	2016-05-25T21:22:00Z,120,0,4,9915,1,0
+	2016-05-25T21:22:00Z,120,0,4,9915,1,0,0
 
 That is a typical CSV line, with the fields interpreted as follow:
 
@@ -48,14 +48,16 @@ format,
 - **ambient light level**, from 1 (darkest) to 4 (brightest) with 0
   meaning unknown
 - **activity mask**, currently 3 for deep sleep, 1 for non-deep sleep or 0
-  for not sleeping.
+  for not sleeping,
+- **heart beats**, or 0 when there is no heart rate sensor or when the
+  data is not available for another reason.
 
 Sometimes Pebble Health has no available data for a given minute, then all
 fields except time are empty, so it looks like this:
 
-	2016-05-25T05:14:00Z,,,,,,
+	2016-05-25T05:14:00Z,,,,,,,
 
-## Optional Feature
+## Optional Features
 
 ### Auto Wakeup
 
